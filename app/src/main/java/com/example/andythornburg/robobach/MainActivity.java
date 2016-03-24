@@ -3,7 +3,6 @@ package com.example.andythornburg.robobach;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.R;
 import android.util.Log;
 
 import com.spotify.sdk.android.authentication.AuthenticationClient;
