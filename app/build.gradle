@@ -4,16 +4,10 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1" // Note: this version should match the latest build-tools version
     // that you installed in the SDK manager
-<<<<<<< HEAD
 
     defaultConfig {
-        applicationId "com.example.andythornburg.robobach"
+        applicationId "companydomain.applicationname"
         minSdkVersion 15
-=======
-    defaultConfig {
-        applicationId 'Robobatch'
-        minSdkVersion 23
->>>>>>> cc0ea21e05eb7a248d3aa50618421c2e3baeaeb6
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -24,11 +18,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-<<<<<<< HEAD
-=======
-    productFlavors {
-    }
->>>>>>> cc0ea21e05eb7a248d3aa50618421c2e3baeaeb6
 }
 
 repositories {
@@ -40,7 +29,6 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-<<<<<<< HEAD
 
     // This library handles authentication and authorization
     compile 'com.spotify.sdk:spotify-auth:1.0.0-beta12@aar'
@@ -51,12 +39,3 @@ dependencies {
     // All other dependencies for your app should also be here:
     compile 'com.android.support:appcompat-v7:23.1.1'
 }
-=======
-    // This library handles authentication and authorization
-    compile 'com.spotify.sdk:spotify-auth:1.0.0-beta12@aar'
-    // This library handles music playback
-    compile 'com.spotify.sdk:spotify-player:1.0.0-beta12@aar'
-    // All other dependencies for your app should also be here:
-    compile 'com.android.support:appcompat-v7:23.1.1'
-}
->>>>>>> cc0ea21e05eb7a248d3aa50618421c2e3baeaeb6

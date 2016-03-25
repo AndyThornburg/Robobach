@@ -3,13 +3,7 @@ package com.example.andythornburg.robobach;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.util.Log;
-import android.view.View;
-=======
-import android.R;
-import android.util.Log;
->>>>>>> cc0ea21e05eb7a248d3aa50618421c2e3baeaeb6
 
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
@@ -38,11 +32,7 @@ public class MainActivity extends Activity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-        setContentView(R.layout.activity_main);
-=======
         setContentView(R.layout.main_activity);
->>>>>>> cc0ea21e05eb7a248d3aa50618421c2e3baeaeb6
         AuthenticationRequest.Builder builder =
                 new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
         builder.setScopes(new String[]{"user-read-private", "streaming"});
@@ -121,12 +111,6 @@ public class MainActivity extends Activity implements
                 break;
         }
     }
-<<<<<<< HEAD
-    public void SearchButtonClicked(View v) {
-
-    }
-=======
->>>>>>> cc0ea21e05eb7a248d3aa50618421c2e3baeaeb6
 
     @Override
     protected void onDestroy() {
