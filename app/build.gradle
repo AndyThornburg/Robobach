@@ -6,7 +6,7 @@ android {
     // that you installed in the SDK manager
 
     defaultConfig {
-        applicationId "companydomain.applicationname"
+        applicationId "com.example.andythornburg.robobach"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
