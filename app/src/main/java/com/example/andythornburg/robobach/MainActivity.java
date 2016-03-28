@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
@@ -15,6 +18,9 @@ import com.spotify.sdk.android.player.PlayerNotificationCallback;
 import com.spotify.sdk.android.player.PlayerState;
 import com.spotify.sdk.android.player.Spotify;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class MainActivity extends Activity implements
         PlayerNotificationCallback, ConnectionStateCallback {
@@ -23,17 +29,35 @@ public class MainActivity extends Activity implements
     private static final String CLIENT_ID = "e393d0645bfb4da89e6630b9c4de723e";
     // TODO: Replace with your redirect URI
     private static final String REDIRECT_URI = "robobach://callback";
-
     // Request code that will be passed together with authentication result to the onAuthenticationResult callback
     // Can be any integer
     private static final int REQUEST_CODE = 1337;
-
     private Player mPlayer;
+    // List view
+    private ListView lv;
+    // Listview Adapter
+    ArrayAdapter<String> adapter;
+    // Search EditText
+    EditText inputSearch;
+    // ArrayList for Listview
+    ArrayList<HashMap<String, String>> productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Listview Data
+        String products[] = {
+
+        };
+
+        lv = (ListView) findViewById(R.id.list_view);
+        inputSearch = (EditText) findViewById(R.id.inputSearch);
+
+        // Adding items to listview
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
+        lv.setAdapter(adapter);
+
         AuthenticationRequest.Builder builder =
                 new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
         builder.setScopes(new String[]{"user-read-private", "streaming"});
