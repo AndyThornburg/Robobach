@@ -20,7 +20,6 @@ import com.spotify.sdk.android.player.Spotify;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class MainActivity extends Activity implements
         PlayerNotificationCallback, ConnectionStateCallback {
@@ -90,22 +89,6 @@ public class MainActivity extends Activity implements
             }
         }
     }
-    public final class TrackRequest extends AbstractRequest.Builder<TrackRequest, Track> {
-        /**
-         * (non-doc)
-         */
-        public TrackRequest() {
-            super(Track.class);
-        }
-
-        /**
-         * (non-doc)
-         */
-        public TrackRequest setTrack(String track) {
-            return setPath(String.format(Locale.ENGLISH, "/v1/track/%s", track));
-        }
-    }
-
     @Override
     public void onLoggedIn() {
         Log.d("MainActivity", "User logged in");

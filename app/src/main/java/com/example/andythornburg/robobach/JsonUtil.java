@@ -1,4 +1,6 @@
-package com.wrapper.spotify;
+package com.example.andythornburg.robobach; /**
+ * Created by andythornburg on 4/5/16.
+ */
 import com.wrapper.spotify.models.Album;
 import com.wrapper.spotify.models.AlbumType;
 import com.wrapper.spotify.models.Artist;
