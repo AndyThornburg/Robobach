@@ -2,18 +2,14 @@ package com.example.andythornburg.robobach;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
+import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
 import com.spotify.sdk.android.player.Config;
 import com.spotify.sdk.android.player.ConnectionStateCallback;
@@ -22,8 +18,9 @@ import com.spotify.sdk.android.player.PlayerNotificationCallback;
 import com.spotify.sdk.android.player.PlayerState;
 import com.spotify.sdk.android.player.Spotify;
 
-import java.io.UnsupportedEncodingException;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
 
 public class MainActivity extends Activity implements
         PlayerNotificationCallback, ConnectionStateCallback {
@@ -36,6 +33,37 @@ public class MainActivity extends Activity implements
     // Can be any integer
     private static final int REQUEST_CODE = 1337;
     private Player mPlayer;
+    // List view
+    private ListView lv;
+    // Listview Adapter
+    ArrayAdapter<String> adapter;
+    // Search EditText
+    EditText inputSearch;
+    // ArrayList for Listview
+    ArrayList<HashMap<String, String>> productList;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // Listview Data
+        String Results[] = {
+
+        };
+
+        lv = (ListView) findViewById(R.id.list_view);
+        inputSearch = (EditText) findViewById(R.id.inputSearch);
+
+        // Adding items to listview
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, Results);
+        lv.setAdapter(adapter);
+
+        AuthenticationRequest.Builder builder =
+                new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
+        builder.setScopes(new String[]{"user-read-private", "streaming"});
+        AuthenticationRequest request = builder.build();
+
+        AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -62,49 +90,21 @@ public class MainActivity extends Activity implements
             }
         }
     }
-
-    RequestQueue queue = Volley.newRequestQueue(this);
-    String url ="https://api.spotify.com/v1/tracks/{id}";
-
-    public class GsonRequest<T> extends Request<T> {
-        protected final Gson gson;
-        protected final Class<T> clazz;
-        private final Response.Listener<T> listener;
-
-        public GsonRequest(String url, Class<T> clazz, Response.Listener<T> listener,
-                           Response.ErrorListener errorListener) {
-            super(Method.GET, url, errorListener);
-
-            this.clazz = clazz;
-            this.listener = listener;
-            this.gson = new Gson();
+    public final class TrackRequest extends AbstractRequest.Builder<TrackRequest, Track> {
+        /**
+         * (non-doc)
+         */
+        public TrackRequest() {
+            super(Track.class);
         }
 
-        public class Song {
-            String id;
-        }
-
-        @Override
-        protected void deliverResponse(T response) {
-            listener.onResponse(response);
-        }
-
-        @Override
-        protected Response<T> parseNetworkResponse(NetworkResponse response) {
-            try {
-                String json = new String(
-                        response.data, HttpHeaderParser.parseCharset(response.headers));
-                return Response.success(
-                        gson.fromJson(json, clazz), HttpHeaderParser.parseCacheHeaders(response));
-
-            } catch (UnsupportedEncodingException e) {
-                return Response.error(new ParseError(e));
-            } catch (JsonSyntaxException e) {
-                return Response.error(new ParseError(e));
-            }
+        /**
+         * (non-doc)
+         */
+        public TrackRequest setTrack(String track) {
+            return setPath(String.format(Locale.ENGLISH, "/v1/track/%s", track));
         }
     }
-
 
     @Override
     public void onLoggedIn() {
