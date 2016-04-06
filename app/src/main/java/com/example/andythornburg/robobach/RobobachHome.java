@@ -1,7 +1,6 @@
 package com.example.andythornburg.robobach;
 
 import android.app.Activity;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,18 +15,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.andythornburg.robobach.http.GSONRequest;
-import com.example.andythornburg.robobach.model.User;
+import com.example.andythornburg.robobach.model.Track;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
@@ -202,10 +197,10 @@ public class RobobachHome extends Activity {
                 custHeaders.put("Accept", "application/json");
                 custHeaders.put("Authorization", "Bearer "+response.getAccessToken());
                 String url = spotifyBaseUrl+"me";
-                GSONRequest<User> stringRequest = new GSONRequest<User>(url,User.class,custHeaders,
-                        new Response.Listener<User>() {
+                GSONRequest<Track> stringRequest = new GSONRequest<Track>(url,Track.class,custHeaders,
+                        new Response.Listener<Track>() {
                             @Override
-                            public void onResponse(User response) {
+                            public void onResponse(Track response) {
                                 Log.d("JSON RESPONSE","Response is: "+ response.getDisplayName());
                             }
                         }, new Response.ErrorListener() {
