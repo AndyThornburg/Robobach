@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Robobach</string>
+    <string-array name="menu_array">
+        <item>Home</item>
+        <item>Create Party</item>
+        <item>Join Party</item>
+        <item>Request Song</item>
+    </string-array>
+    <string name="drawer_open">Open menu</string>
+    <string name="drawer_close">Close menu</string>
+    <string name="action_websearch">Search Song</string>
 </resources>
