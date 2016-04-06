@@ -21,7 +21,7 @@ import com.spotify.sdk.android.player.Spotify;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends Activity implements
+public class SearchActivity extends Activity implements
         PlayerNotificationCallback, ConnectionStateCallback {
 
     // TODO: Replace with your client ID
@@ -76,14 +76,14 @@ public class MainActivity extends Activity implements
                 mPlayer = Spotify.getPlayer(playerConfig, this, new Player.InitializationObserver() {
                     @Override
                     public void onInitialized(Player player) {
-                        mPlayer.addConnectionStateCallback(MainActivity.this);
-                        mPlayer.addPlayerNotificationCallback(MainActivity.this);
+                        mPlayer.addConnectionStateCallback(SearchActivity.this);
+                        mPlayer.addPlayerNotificationCallback(SearchActivity.this);
                         mPlayer.play("spotify:track:2TpxZ7JUBn3uw46aR7qd6V");
                     }
 
                     @Override
                     public void onError(Throwable throwable) {
-                        Log.e("MainActivity", "Could not initialize player: " + throwable.getMessage());
+                        Log.e("SearchActivity", "Could not initialize player: " + throwable.getMessage());
                     }
                 });
             }
@@ -91,32 +91,32 @@ public class MainActivity extends Activity implements
     }
     @Override
     public void onLoggedIn() {
-        Log.d("MainActivity", "User logged in");
+        Log.d("SearchActivity", "User logged in");
     }
 
     @Override
     public void onLoggedOut() {
-        Log.d("MainActivity", "User logged out");
+        Log.d("SearchActivity", "User logged out");
     }
 
     @Override
     public void onLoginFailed(Throwable error) {
-        Log.d("MainActivity", "Login failed");
+        Log.d("SearchActivity", "Login failed");
     }
 
     @Override
     public void onTemporaryError() {
-        Log.d("MainActivity", "Temporary error occurred");
+        Log.d("Activity", "Temporary error occurred");
     }
 
     @Override
     public void onConnectionMessage(String message) {
-        Log.d("MainActivity", "Received connection message: " + message);
+        Log.d("SearchActivity", "Received connection message: " + message);
     }
 
     @Override
     public void onPlaybackEvent(EventType eventType, PlayerState playerState) {
-        Log.d("MainActivity", "Playback event received: " + eventType.name());
+        Log.d("SearchActivity", "Playback event received: " + eventType.name());
         switch (eventType) {
             // Handle event type as necessary
             default:
@@ -126,7 +126,7 @@ public class MainActivity extends Activity implements
 
     @Override
     public void onPlaybackError(ErrorType errorType, String errorDetails) {
-        Log.d("MainActivity", "Playback error received: " + errorType.name());
+        Log.d("SearchActivity", "Playback error received: " + errorType.name());
         switch (errorType) {
             // Handle error type as necessary
             default:
