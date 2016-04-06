@@ -16,7 +16,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.andythornburg.robobach.http.GSONRequest;
 import com.example.andythornburg.robobach.model.Track;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
-import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
 import com.spotify.sdk.android.player.Config;
 import com.spotify.sdk.android.player.ConnectionStateCallback;
@@ -58,7 +57,7 @@ public class SearchActivity extends Activity implements
         Map<String,String> custHeaders = new HashMap<String,String>();
         custHeaders.put("Accept", "application/json");
 //        custHeaders.put("Authorization", "Bearer "+ response.getAccessToken());
-        String url = "https://api.spotify.com/v1/tracks/{id}"+"me";
+        String url = "https://api.spotify.com/v1/tracks";
         GSONRequest<Track> stringRequest = new GSONRequest<Track>(url,Track.class,custHeaders,
                 new Response.Listener<Track>() {
                     @Override
@@ -72,23 +71,7 @@ public class SearchActivity extends Activity implements
             }
         });
         queue.add(stringRequest);
-        String Results[] = {
-
-        };
-
-        lv = (ListView) findViewById(R.id.list_view);
-        inputSearch = (EditText) findViewById(R.id.inputSearch);
-
-        // Adding items to listview
-        adapter = new ArrayAdapter<Track>
-        lv.setAdapter(adapter);
-
-        AuthenticationRequest.Builder builder =
-                new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
-        builder.setScopes(new String[]{"user-read-private", "streaming"});
-        AuthenticationRequest request = builder.build();
-
-        AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
+        String Results[] = {"Songs are here"};
     }
 
     @Override
