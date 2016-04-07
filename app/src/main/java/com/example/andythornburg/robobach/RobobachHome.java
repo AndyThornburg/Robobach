@@ -38,7 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by alexthornburg on 4/5/16.
+ * Created by andythornburg on 2/5/16.
  */
 public class RobobachHome extends Activity {
     private static final String CLIENT_ID = "e393d0645bfb4da89e6630b9c4de723e";
@@ -141,14 +141,14 @@ public class RobobachHome extends Activity {
         Log.d("ITEM_ID",String.valueOf(item.getItemId()));
         switch(item.getItemId()) {
             case R.id.action_websearch:
-                Toast.makeText(this, "OPEN Andy's Search", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Opening Search!", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    /* The click listner for ListView in the navigation drawer */
+    /* The click listner for SearchActivity in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -179,7 +179,7 @@ public class RobobachHome extends Activity {
 
     /**
      * When using the ActionBarDrawerToggle, you must call it during
-     * onPostCreate() and onConfigurationChanged()...
+         * onPostCreate() and onConfigurationChanged()...
      */
 
     @Override

@@ -2,14 +2,24 @@ package com.example.andythornburg.robobach;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.example.andythornburg.robobach.http.GSONRequest;
+import com.example.andythornburg.robobach.model.Album;
+import com.example.andythornburg.robobach.model.Artists;
+import com.example.andythornburg.robobach.model.Item;
+import com.example.andythornburg.robobach.model.SearchResult;
+import com.example.andythornburg.robobach.model.User;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
-import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
 import com.spotify.sdk.android.player.Config;
 import com.spotify.sdk.android.player.ConnectionStateCallback;
@@ -20,6 +30,7 @@ import com.spotify.sdk.android.player.Spotify;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class SearchActivity extends Activity implements
         PlayerNotificationCallback, ConnectionStateCallback {
@@ -40,28 +51,38 @@ public class SearchActivity extends Activity implements
     EditText inputSearch;
     // ArrayList for Listview
     ArrayList<HashMap<String, String>> productList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Listview Data
-        String Results[] = {
-
-        };
-
-        lv = (ListView) findViewById(R.id.list_view);
-        inputSearch = (EditText) findViewById(R.id.inputSearch);
-
-        // Adding items to listview
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, Results);
-        lv.setAdapter(adapter);
-
-        AuthenticationRequest.Builder builder =
-                new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
-        builder.setScopes(new String[]{"user-read-private", "streaming"});
-        AuthenticationRequest request = builder.build();
-
-        AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
+        SharedPreferences prefs = getSharedPreferences("AUTH SHARED PREFS", MODE_PRIVATE);
+        RequestQueue queue = Volley.newRequestQueue(this);
+        Map<String,String> custHeaders = new HashMap<String,String>();
+        custHeaders.put("Accept", "application/json");
+       custHeaders.put("Authorization", "Bearer "+ prefs.getString("OAUTH_TOKEN","OH NO OATH NOT FOUND"));
+        String url = "https://api.spotify.com/v1/search?q=abba&type=track&market=US"; //TODO: FIX THIS Q SHOULD BE SOMETHING OTHER THAN ABBA
+        GSONRequest<SearchResult> stringRequest = new GSONRequest<SearchResult>(url,SearchResult.class,custHeaders,
+                new Response.Listener<SearchResult>() {
+                    @Override
+                    public void onResponse(SearchResult response) {
+                        for(Item item:response.getTracks().getItems()){
+                            Log.d("ITEM NAME",item.getName());
+                            for(Artists artist:item.getArtists()) {
+                                Log.d("ARTISTS", artist.getName()); //TODO: WORK ON GETTING THIS IN ARRAY AND PRINTING TO LIST VIEW!!!
+                            }
+                        }
+                        Log.d("HREF PRINT",response.getTracks().getHref());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("JSON ERROR","COULD NOT STORE USER INFO IN DB");
+            }
+        });
+        queue.add(stringRequest);
+        String Results[] = {"Songs are here"};
     }
 
     @Override
