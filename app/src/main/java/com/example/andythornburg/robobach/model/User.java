@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by alexthornburg on 4/5/16.
  */
-public class Track {
+public class User {
     private String birthdate;
     private String country;
     @SerializedName("display_name")

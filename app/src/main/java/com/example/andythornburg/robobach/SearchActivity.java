@@ -14,7 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.andythornburg.robobach.http.GSONRequest;
-import com.example.andythornburg.robobach.model.Track;
+import com.example.andythornburg.robobach.model.User;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
 import com.spotify.sdk.android.player.Config;
@@ -47,6 +47,7 @@ public class SearchActivity extends Activity implements
     EditText inputSearch;
     // ArrayList for Listview
     ArrayList<HashMap<String, String>> productList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +59,10 @@ public class SearchActivity extends Activity implements
         custHeaders.put("Accept", "application/json");
 //        custHeaders.put("Authorization", "Bearer "+ response.getAccessToken());
         String url = "https://api.spotify.com/v1/tracks";
-        GSONRequest<Track> stringRequest = new GSONRequest<Track>(url,Track.class,custHeaders,
-                new Response.Listener<Track>() {
+        GSONRequest<SearchActivity> stringRequest = new GSONRequest<SearchActivity>(url,SearchActivity.class,custHeaders,
+                new Response.Listener<SearchActivity>() {
                     @Override
-                    public void onResponse(Track response) {
+                    public void onResponse(User response) {
                         Log.d("JSON RESPONSE","Response is: "+ response.getDisplayName());
                     }
                 }, new Response.ErrorListener() {
@@ -101,12 +102,12 @@ public class SearchActivity extends Activity implements
     }
     @Override
     public void onLoggedIn() {
-        Log.d("SearchActivity", "Track logged in");
+        Log.d("SearchActivity", "User logged in");
     }
 
     @Override
     public void onLoggedOut() {
-        Log.d("SearchActivity", "Track logged out");
+        Log.d("SearchActivity", "User logged out");
     }
 
     @Override

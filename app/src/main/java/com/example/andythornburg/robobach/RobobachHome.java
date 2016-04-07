@@ -23,7 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.andythornburg.robobach.http.GSONRequest;
-import com.example.andythornburg.robobach.model.Track;
+import com.example.andythornburg.robobach.model.User;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
@@ -126,14 +126,14 @@ public class RobobachHome extends Activity {
         Log.d("ITEM_ID",String.valueOf(item.getItemId()));
         switch(item.getItemId()) {
             case R.id.action_websearch:
-                Toast.makeText(this, "OPEN Andy's Search", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Opening Search!", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    /* The click listner for ListView in the navigation drawer */
+    /* The click listner for SearchActivity in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -164,7 +164,7 @@ public class RobobachHome extends Activity {
 
     /**
      * When using the ActionBarDrawerToggle, you must call it during
-     * onPostCreate() and onConfigurationChanged()...
+         * onPostCreate() and onConfigurationChanged()...
      */
 
     @Override
@@ -197,10 +197,10 @@ public class RobobachHome extends Activity {
                 custHeaders.put("Accept", "application/json");
                 custHeaders.put("Authorization", "Bearer "+response.getAccessToken());
                 String url = spotifyBaseUrl+"me";
-                GSONRequest<Track> stringRequest = new GSONRequest<Track>(url,Track.class,custHeaders,
-                        new Response.Listener<Track>() {
+                GSONRequest<User> stringRequest = new GSONRequest<User>(url,User.class,custHeaders,
+                        new Response.Listener<User>() {
                             @Override
-                            public void onResponse(Track response) {
+                            public void onResponse(User response) {
                                 Log.d("JSON RESPONSE","Response is: "+ response.getDisplayName());
                             }
                         }, new Response.ErrorListener() {
