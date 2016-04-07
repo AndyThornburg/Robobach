@@ -22,6 +22,42 @@ public class User {
     private String product;
     private String type;
     private String uri;
+    private String phoneNumber;
+    private Party party;
+    private boolean isInParty;
+    private boolean isHeadOfParty;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Party getParty() {
+        return party;
+    }
+
+    public void setParty(Party party) {
+        this.party = party;
+    }
+
+    public boolean isInParty() {
+        return isInParty;
+    }
+
+    public void setIsInParty(boolean isInParty) {
+        this.isInParty = isInParty;
+    }
+
+    public boolean isHeadOfParty() {
+        return isHeadOfParty;
+    }
+
+    public void setIsHeadOfParty(boolean isHeadOfParty) {
+        this.isHeadOfParty = isHeadOfParty;
+    }
 
     public String getBirthdate() {
         return birthdate;

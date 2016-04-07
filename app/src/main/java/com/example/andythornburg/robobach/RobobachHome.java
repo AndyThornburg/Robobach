@@ -1,7 +1,6 @@
 package com.example.andythornburg.robobach;
 
 import android.app.Activity;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -9,7 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,21 +16,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.andythornburg.robobach.http.GSONRequest;
+import com.example.andythornburg.robobach.http.GSONGetRequest;
+import com.example.andythornburg.robobach.http.JSONPostRequest;
 import com.example.andythornburg.robobach.model.User;
+import com.google.gson.Gson;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,9 +49,18 @@ public class RobobachHome extends Activity {
     private ActionBarDrawerToggle mDrawerToggle;
     private final String AUTH_SHARED_PREFS = "AUTH SHARED PREFS";
     private String spotifyBaseUrl = "https://api.spotify.com/v1/";
+    private String mongoBaseUrl = ""
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mMenuTitles;
+    private int GET = 0;
+    private int POST = 1;
+    private int PUT = 2;
+    private int DELETE = 3;
+    private int HEAD = 4;
+    private int OPTIONS = 5;
+    private int TRACE = 6;
+    private int PATCH = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,10 +212,14 @@ public class RobobachHome extends Activity {
                 custHeaders.put("Accept", "application/json");
                 custHeaders.put("Authorization", "Bearer "+response.getAccessToken());
                 String url = spotifyBaseUrl+"me";
-                GSONRequest<User> stringRequest = new GSONRequest<User>(url,User.class,custHeaders,
+                final User[] currentUser = {new User()};
+                GSONGetRequest<User> stringRequest = new GSONGetRequest<User>(GET,url,User.class,custHeaders,
                         new Response.Listener<User>() {
                             @Override
                             public void onResponse(User response) {
+                                TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+                                response.setPhoneNumber(tm.getLine1Number());
+                                currentUser[0] = response;
                                 Log.d("JSON RESPONSE","Response is: "+ response.getDisplayName());
                             }
                         }, new Response.ErrorListener() {
@@ -214,8 +228,30 @@ public class RobobachHome extends Activity {
                         Log.e("JSON ERROR","COULD NOT STORE USER INFO IN DB");
                     }
                 });
+                User postUser = currentUser[0];
                 queue.add(stringRequest);
+                Gson gson = new Gson();
+                String mongoUrl =
+                try {
+                    JSONObject json = new JSONObject(gson.toJson(postUser));
+                    JSONPostRequest post = new JSONPostRequest(POST,url,json,custHeaders,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    Log.d("JSON RESPONSE","Response is: "+ response.toString());
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("JSON ERROR","COULD NOT STORE USER INFO IN DB");
+                        }
+                    });
+                    queue.add(post);
+                } catch (JSONException e) {
+                    Log.e("JSON OBJECT ERRROR", e.getMessage());
+                }
             }
+
         }
     }
 

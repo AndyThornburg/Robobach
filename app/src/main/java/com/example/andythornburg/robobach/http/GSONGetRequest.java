@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Created by alexthornburg on 4/5/16.
  */
-public class GSONRequest<T> extends Request<T> {
+public class GSONGetRequest<T> extends Request<T> {
     private final Gson gson = new Gson();
     private final Class<T> clazz;
     private final Map<String, String> headers;
@@ -30,9 +30,9 @@ public class GSONRequest<T> extends Request<T> {
      * @param clazz Relevant class object, for Gson's reflection
      * @param headers Map of request headers
      */
-    public GSONRequest(String url, Class<T> clazz, Map<String, String> headers,
-                       Response.Listener<T> listener, Response.ErrorListener errorListener) {
-        super(Method.GET, url, errorListener);
+    public GSONGetRequest(int method,String url, Class<T> clazz, Map<String, String> headers,
+                          Response.Listener<T> listener, Response.ErrorListener errorListener) {
+        super(method, url, errorListener);
         this.clazz = clazz;
         this.headers = headers;
         this.listener = listener;
