@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.andythornburg.robobach.http.GSONRequest;
 import com.example.andythornburg.robobach.model.Album;
+import com.example.andythornburg.robobach.model.Artists;
 import com.example.andythornburg.robobach.model.Item;
 import com.example.andythornburg.robobach.model.SearchResult;
 import com.example.andythornburg.robobach.model.User;
@@ -66,7 +67,13 @@ public class SearchActivity extends Activity implements
                 new Response.Listener<SearchResult>() {
                     @Override
                     public void onResponse(SearchResult response) {
-                        Log.d("HREF PRINT",response.getHref());
+                        for(Item item:response.getTracks().getItems()){
+                            Log.d("ITEM NAME",item.getName());
+                            for(Artists artist:item.getArtists()) {
+                                Log.d("ARTISTS", artist.getName()); //TODO: WORK ON GETTING THIS IN ARRAY AND PRINTING TO LIST VIEW!!!
+                            }
+                        }
+                        Log.d("HREF PRINT",response.getTracks().getHref());
                     }
                 }, new Response.ErrorListener() {
             @Override

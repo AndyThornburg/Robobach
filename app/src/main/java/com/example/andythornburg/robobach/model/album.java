@@ -1,74 +1,48 @@
 package com.example.andythornburg.robobach.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
- * Created by andythornburg on 4/6/16.
+ * Created by alexthornburg on 4/6/16.
  */
 public class Album {
-    String albumType;
-    String[] availableMarkets;
-    List<ExternalUrl> externalUrls;
-    List<Images> images;
-    String href;
-    String id;
-    String name;
-    String popularity;
-    String preview_url;
-    String track_number;
-    String type;
-    String uri;
+    @SerializedName("album_type")
+    private String albumType;
+    @SerializedName("available_markets")
+    private String[] markets;
+    @SerializedName("external_urls")
+    private ExternalUrl externalUrls;
+    private String href;
+    private String id;
+    private List<Image> images;
+    private String name;
+    private String type;
+    private String uri;
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAlbumType() {
+        return albumType;
     }
 
-    public String getPopularity() {
-        return popularity;
+    public void setAlbumType(String albumType) {
+        this.albumType = albumType;
     }
 
-    public void setPopularity(String popularity) {
-        this.popularity = popularity;
+    public String[] getMarkets() {
+        return markets;
     }
 
-    public String getPreview_url() {
-        return preview_url;
+    public void setMarkets(String[] markets) {
+        this.markets = markets;
     }
 
-    public void setPreview_url(String preview_url) {
-        this.preview_url = preview_url;
+    public ExternalUrl getExternalUrls() {
+        return externalUrls;
     }
 
-    public String getTrack_number() {
-        return track_number;
-    }
-
-    public void setTrack_number(String track_number) {
-        this.track_number = track_number;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public List<Images> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Images> images) {
-        this.images = images;
+    public void setExternalUrls(ExternalUrl externalUrls) {
+        this.externalUrls = externalUrls;
     }
 
     public String getHref() {
@@ -87,28 +61,35 @@ public class Album {
         this.id = id;
     }
 
-    public List<ExternalUrl> getExternalUrls() {
-        return externalUrls;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setExternalUrls(List<ExternalUrl> externalUrls) {
-        this.externalUrls = externalUrls;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
-    public String[] getAvailableMarkets() {
-        return availableMarkets;
+    public String getName() {
+        return name;
     }
 
-    public void setAvailableMarkets(String[] availableMarkets) {
-        this.availableMarkets = availableMarkets;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAlbumType() {
-        return albumType;
+    public String getType() {
+        return type;
     }
 
-    public void setAlbumType(String albumType) {
-        this.albumType = albumType;
+    public void setType(String type) {
+        this.type = type;
     }
 
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
 }

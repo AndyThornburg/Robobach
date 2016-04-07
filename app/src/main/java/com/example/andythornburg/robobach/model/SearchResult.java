@@ -6,22 +6,13 @@ import java.util.List;
  * Created by andythornburg on 4/6/16.
  */
 public class SearchResult {
-    public String href;
-    List<Item> items;
+    private Track tracks;
 
-    public List<Item> getItems() {
-        return items;
+    public Track getTracks() {
+        return tracks;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public String getHref() {
-        return href;
-    }
-
-    public void setHref(String href) {
-        this.href = href;
+    public void setTracks(Track tracks) {
+        this.tracks = tracks;
     }
 }

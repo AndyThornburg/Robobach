@@ -1,40 +1,75 @@
 package com.example.andythornburg.robobach.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
  * Created by andythornburg on 4/6/16.
  */
 public class Item {
-    List<Album> albums;
-    int disc_number;
-    int duration_ms;
-    boolean explicit;
-    List <external_ids> External_ids;
-    String [] available_markets;
+    private List<Album> albums;
+    private List<Artists> artists;
+    @SerializedName("available_markets")
+    private String[] availableMarkets;
+    @SerializedName("disc_number")
+    private int discNumber;
+    @SerializedName("duration_ms")
+    private int durationMillis;
+    private boolean explicit;
+    @SerializedName("external_ids")
+    private ExternalId externalId;
+    @SerializedName("esternal_urls")
+    private ExternalUrl externalUrl;
+    private String href;
+    private String id;
+    private String name;
+    private int popularity;
+    @SerializedName("preview_url")
+    private String previewUrl;
+    @SerializedName("track_number")
+    private int trackNumber;
+    private String track;
+    private String uri;
 
-    public String[] getAvailable_markets() {
-        return available_markets;
+    public List<Album> getAlbums() {
+        return albums;
     }
 
-    public void setAvailable_markets(String[] available_markets) {
-        this.available_markets = available_markets;
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
     }
 
-    public int getDisc_number() {
-        return disc_number;
+    public List<Artists> getArtists() {
+        return artists;
     }
 
-    public void setDisc_number(int disc_number) {
-        this.disc_number = disc_number;
+    public void setArtists(List<Artists> artists) {
+        this.artists = artists;
     }
 
-    public int getDuration_ms() {
-        return duration_ms;
+    public String[] getAvailableMarkets() {
+        return availableMarkets;
     }
 
-    public void setDuration_ms(int duration_ms) {
-        this.duration_ms = duration_ms;
+    public void setAvailableMarkets(String[] availableMarkets) {
+        this.availableMarkets = availableMarkets;
+    }
+
+    public int getDiscNumber() {
+        return discNumber;
+    }
+
+    public void setDiscNumber(int discNumber) {
+        this.discNumber = discNumber;
+    }
+
+    public int getDurationMillis() {
+        return durationMillis;
+    }
+
+    public void setDurationMillis(int durationMillis) {
+        this.durationMillis = durationMillis;
     }
 
     public boolean isExplicit() {
@@ -45,19 +80,83 @@ public class Item {
         this.explicit = explicit;
     }
 
-    public List<external_ids> getExternal_ids() {
-        return External_ids;
+    public ExternalId getExternalId() {
+        return externalId;
     }
 
-    public void setExternal_ids(List<external_ids> external_ids) {
-        External_ids = external_ids;
+    public void setExternalId(ExternalId externalId) {
+        this.externalId = externalId;
     }
 
-    public List<Album> getAlbums() {
-        return albums;
+    public ExternalUrl getExternalUrl() {
+        return externalUrl;
     }
 
-    public void setAlbums(List<Album> albums) {
-        this.albums = albums;
+    public void setExternalUrl(ExternalUrl externalUrl) {
+        this.externalUrl = externalUrl;
+    }
+
+    public String getHref() {
+        return href;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
+
+    public String getPreviewUrl() {
+        return previewUrl;
+    }
+
+    public void setPreviewUrl(String previewUrl) {
+        this.previewUrl = previewUrl;
+    }
+
+    public int getTrackNumber() {
+        return trackNumber;
+    }
+
+    public void setTrackNumber(int trackNumber) {
+        this.trackNumber = trackNumber;
+    }
+
+    public String getTrack() {
+        return track;
+    }
+
+    public void setTrack(String track) {
+        this.track = track;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

@@ -1,10 +1,10 @@
 package com.example.andythornburg.robobach.model;
 
 /**
- * Created by andythornburg on 4/6/16.
+ * Created by alexthornburg on 4/6/16.
  */
-public class external_ids {
-    String isrc;
+public class ExternalId {
+    private String isrc;
 
     public String getIsrc() {
         return isrc;
