@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by andythornburg on 4/6/16.
  */
-public class FindTrack {
+public class SearchResult {
     public String href;
     List<Item> items;
 

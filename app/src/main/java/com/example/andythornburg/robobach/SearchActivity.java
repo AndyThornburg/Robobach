@@ -14,6 +14,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.andythornburg.robobach.http.GSONRequest;
+import com.example.andythornburg.robobach.model.Album;
+import com.example.andythornburg.robobach.model.Item;
+import com.example.andythornburg.robobach.model.SearchResult;
 import com.example.andythornburg.robobach.model.User;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
@@ -57,13 +60,13 @@ public class SearchActivity extends Activity implements
         RequestQueue queue = Volley.newRequestQueue(this);
         Map<String,String> custHeaders = new HashMap<String,String>();
         custHeaders.put("Accept", "application/json");
-//        custHeaders.put("Authorization", "Bearer "+ response.getAccessToken());
-        String url = "https://api.spotify.com/v1/tracks";
-        GSONRequest<SearchActivity> stringRequest = new GSONRequest<SearchActivity>(url,SearchActivity.class,custHeaders,
-                new Response.Listener<SearchActivity>() {
+       custHeaders.put("Authorization", "Bearer "+ prefs.getString("OAUTH_TOKEN","OH NO OATH NOT FOUND"));
+        String url = "https://api.spotify.com/v1/search?q=abba&type=track&market=US"; //TODO: FIX THIS Q SHOULD BE SOMETHING OTHER THAN ABBA
+        GSONRequest<SearchResult> stringRequest = new GSONRequest<SearchResult>(url,SearchResult.class,custHeaders,
+                new Response.Listener<SearchResult>() {
                     @Override
-                    public void onResponse(User response) {
-                        Log.d("JSON RESPONSE","Response is: "+ response.getDisplayName());
+                    public void onResponse(SearchResult response) {
+                        Log.d("HREF PRINT",response.getHref());
                     }
                 }, new Response.ErrorListener() {
             @Override

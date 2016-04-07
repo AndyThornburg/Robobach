@@ -6,7 +6,7 @@ import java.util.List;
  * Created by andythornburg on 4/6/16.
  */
 public class Item {
-    List<album> albums;
+    List<Album> albums;
     int disc_number;
     int duration_ms;
     boolean explicit;
@@ -53,11 +53,11 @@ public class Item {
         External_ids = external_ids;
     }
 
-    public List<album> getAlbums() {
+    public List<Album> getAlbums() {
         return albums;
     }
 
-    public void setAlbums(List<album> albums) {
+    public void setAlbums(List<Album> albums) {
         this.albums = albums;
     }
 }

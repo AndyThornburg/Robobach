@@ -5,11 +5,11 @@ import java.util.List;
 /**
  * Created by andythornburg on 4/6/16.
  */
-public class album {
+public class Album {
     String albumType;
     String[] availableMarkets;
     List<ExternalUrl> externalUrls;
-    List<images> images;
+    List<Images> images;
     String href;
     String id;
     String name;
@@ -63,11 +63,11 @@ public class album {
         this.uri = uri;
     }
 
-    public List<com.example.andythornburg.robobach.model.images> getImages() {
+    public List<Images> getImages() {
         return images;
     }
 
-    public void setImages(List<com.example.andythornburg.robobach.model.images> images) {
+    public void setImages(List<Images> images) {
         this.images = images;
     }
 

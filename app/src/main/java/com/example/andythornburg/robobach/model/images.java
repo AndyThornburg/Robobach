@@ -5,21 +5,21 @@ import java.util.List;
 /**
  * Created by andythornburg on 4/6/16.
  */
-public class images {
+public class Images {
     int height;
     int url;
     int width;
     String name;
     String type;
     String uri;
-    List <Artists> Artists;
+    List <Artists> artists;
 
     public List<com.example.andythornburg.robobach.model.Artists> getArtists() {
-        return Artists;
+        return artists;
     }
 
     public void setArtists(List<com.example.andythornburg.robobach.model.Artists> artists) {
-        Artists = artists;
+        artists = artists;
     }
 
     public String getName() {
