@@ -49,7 +49,7 @@ public class RobobachHome extends Activity {
     private ActionBarDrawerToggle mDrawerToggle;
     private final String AUTH_SHARED_PREFS = "AUTH SHARED PREFS";
     private String spotifyBaseUrl = "https://api.spotify.com/v1/";
-    private String mongoBaseUrl = ""
+    private String mongoBaseUrl = "";
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mMenuTitles;
@@ -231,7 +231,6 @@ public class RobobachHome extends Activity {
                 User postUser = currentUser[0];
                 queue.add(stringRequest);
                 Gson gson = new Gson();
-                String mongoUrl =
                 try {
                     JSONObject json = new JSONObject(gson.toJson(postUser));
                     JSONPostRequest post = new JSONPostRequest(POST,url,json,custHeaders,
